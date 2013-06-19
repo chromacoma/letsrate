@@ -17,8 +17,8 @@ module Helpers
 
     disable_after_rate = options[:disable_after_rate] || false
 
-    readonly = false
-    if disable_after_rate
+    readonly = options[:readonly] || false
+    if !readonly && disable_after_rate
       readonly = current_user.present? ? !rateable_obj.can_rate?(current_user.id, dimension) : true
     end
 
