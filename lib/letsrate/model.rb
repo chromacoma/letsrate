@@ -76,9 +76,9 @@ module Letsrate
       has_many :rates_without_dimension, :as => :rateable, :class_name => "Rate", :dependent => :destroy, :conditions => {:dimension => nil}
       has_many :raters_without_dimension, :through => :rates_without_dimension, :source => :rater  
       
+      has_one :rating_cache, as: :cacheable
       has_one :rate_average_without_dimension, :as => :cacheable, :class_name => "RatingCache", 
               :dependent => :destroy, :conditions => {:dimension => nil}
-      
 
       dimensions.each do |dimension|        
         has_many "#{dimension}_rates", :dependent => :destroy, 
